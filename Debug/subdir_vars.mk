@@ -7,27 +7,21 @@ CMD_SRCS += \
 ../lnk_msp430g2553.cmd 
 
 C_SRCS += \
-../main.c \
 ../system_pre_init.c 
 
 C_DEPS += \
-./main.d \
 ./system_pre_init.d 
 
 OBJS += \
-./main.obj \
 ./system_pre_init.obj 
 
 OBJS__QUOTED += \
-"main.obj" \
 "system_pre_init.obj" 
 
 C_DEPS__QUOTED += \
-"main.d" \
 "system_pre_init.d" 
 
 C_SRCS__QUOTED += \
-"../main.c" \
 "../system_pre_init.c" 
 
 

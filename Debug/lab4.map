@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker Unix v21.6.1                   
 ******************************************************************************
->> Linked Fri Jul 25 14:56:29 2025
+>> Linked Sun Sep 28 23:54:53 2025
 
 OUTPUT FILE NAME:   <lab4.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000c406
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000c40c
 
 
 MEMORY CONFIGURATION
@@ -19,7 +19,7 @@ MEMORY CONFIGURATION
   INFOC                 00001040   00000040  00000000  00000040  RWIX
   INFOB                 00001080   00000040  00000000  00000040  RWIX
   INFOA                 000010c0   00000040  00000000  00000040  RWIX
-  FLASH                 0000c000   00003fde  000004d8  00003b06  RWIX
+  FLASH                 0000c000   00003fde  00000560  00003a7e  RWIX
   BSLSIGNATURE          0000ffde   00000002  00000002  00000000  RWIX  ffff 
   INT00                 0000ffe0   00000002  00000002  00000000  RWIX
   INT01                 0000ffe2   00000002  00000000  00000002  RWIX
@@ -45,45 +45,52 @@ SECTION ALLOCATION MAP
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
 .data      0    00000200    00000007     UNINITIALIZED
-                  00000200    00000006     main.obj (.data:state_table)
-                  00000206    00000001     main.obj (.data)
+                  00000200    00000006     state.obj (.data:state_table)
+                  00000206    00000001     button.obj (.data)
 
 .stack     0    000003b0    00000050     UNINITIALIZED
                   000003b0    00000002     rts430_eabi.lib : boot.c.obj (.stack)
                   000003b2    0000004e     --HOLE--
 
-.text      0    0000c000    000004c4     
+.text      0    0000c000    0000054c     
                   0000c000    000000c4     rts430_eabi.lib : fs_mpy.asm.obj (.text)
                   0000c0c4    0000009c                     : fs_div.asm.obj (.text)
                   0000c160    0000007c                     : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  0000c1dc    0000005e     main.obj (.text:getDistance)
-                  0000c23a    0000004c     rts430_eabi.lib : lsr16.asm.obj (.text)
-                  0000c286    0000004a                     : fs_cmp.asm.obj (.text)
-                  0000c2d0    00000042                     : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
-                  0000c312    0000002e     main.obj (.text:main)
-                  0000c340    0000002c     main.obj (.text:initGPIO)
-                  0000c36c    0000002c     rts430_eabi.lib : lsl16.asm.obj (.text)
-                  0000c398    00000028     main.obj (.text:Port1_ISR)
-                  0000c3c0    00000024     rts430_eabi.lib : fs_utof.asm.obj (.text)
-                  0000c3e4    00000022     main.obj (.text:init)
-                  0000c406    0000001c     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noargs)
-                  0000c422    0000001c     main.obj (.text:runArmedState)
-                  0000c43e    0000001a     main.obj (.text:runIdleState)
-                  0000c458    00000018     main.obj (.text:runAlertState)
-                  0000c470    00000012     rts430_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  0000c482    00000012                     : memcpy.c.obj (.text:memcpy)
-                  0000c494    00000010                     : epilog.asm.obj (.text)
-                  0000c4a4    0000000a     system_pre_init.obj (.text:_system_pre_init)
-                  0000c4ae    00000008     rts430_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
-                  0000c4b6    00000006     main.obj (.text:Timer1_A0_ISR)
-                  0000c4bc    00000006     rts430_eabi.lib : exit.c.obj (.text:abort)
-                  0000c4c2    00000002                     : startup.c.obj (.text:_system_post_cinit)
+                  0000c1dc    00000058     ultrasound.obj (.text:getDistance)
+                  0000c234    0000004c     rts430_eabi.lib : lsr16.asm.obj (.text)
+                  0000c280    0000004a                     : fs_cmp.asm.obj (.text)
+                  0000c2ca    00000046     util.obj (.text:delay_ms)
+                  0000c310    00000042     rts430_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
+                  0000c352    0000003e     main.obj (.text:main)
+                  0000c390    0000002c     button.obj (.text:Port1_ISR)
+                  0000c3bc    0000002c     rts430_eabi.lib : lsl16.asm.obj (.text)
+                  0000c3e8    00000024                     : fs_utof.asm.obj (.text)
+                  0000c40c    0000001c                     : boot.c.obj (.text:_c_int00_noargs)
+                  0000c428    0000001c     state.obj (.text:runArmedState)
+                  0000c444    0000001a     state.obj (.text:runAlertState)
+                  0000c45e    0000001a     state.obj (.text:runIdleState)
+                  0000c478    00000016     button.obj (.text:initButtonGPIO)
+                  0000c48e    00000016     speaker.obj (.text:setSpeaker)
+                  0000c4a4    00000014     speaker.obj (.text:initTimerSpeaker)
+                  0000c4b8    00000012     rts430_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  0000c4ca    00000012                     : memcpy.c.obj (.text:memcpy)
+                  0000c4dc    00000010                     : epilog.asm.obj (.text)
+                  0000c4ec    00000010     state.obj (.text:runState)
+                  0000c4fc    00000010     button.obj (.text:setButton)
+                  0000c50c    0000000e     ultrasound.obj (.text:initUltrasoundGPIO)
+                  0000c51a    0000000a     system_pre_init.obj (.text:_system_pre_init)
+                  0000c524    0000000a     speaker.obj (.text:initSpeakerGPIO)
+                  0000c52e    00000008     rts430_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+                  0000c536    00000008     ultrasound.obj (.text:initTimerUltrasound)
+                  0000c53e    00000006     speaker.obj (.text:Timer1_A0_ISR)
+                  0000c544    00000006     rts430_eabi.lib : exit.c.obj (.text:abort)
+                  0000c54a    00000002                     : startup.c.obj (.text:_system_post_cinit)
 
-.cinit     0    0000c4c4    00000014     
-                  0000c4c4    0000000b     (.cinit..data.load) [load image]
-                  0000c4cf    00000001     --HOLE-- [fill = 0]
-                  0000c4d0    00000004     (__TI_handler_table)
-                  0000c4d4    00000004     (__TI_cinit_table)
+.cinit     0    0000c54c    00000014     
+                  0000c54c    0000000b     (.cinit..data.load) [load image]
+                  0000c557    00000001     --HOLE-- [fill = 0]
+                  0000c558    00000004     (__TI_handler_table)
+                  0000c55c    00000004     (__TI_cinit_table)
 
 .binit     0    0000c000    00000000     
 
@@ -94,7 +101,7 @@ TRAPINT    0    0000ffe0    00000002
                   0000ffe0    00000002     rts430_eabi.lib : int00.asm.obj (.int00)
 
 PORT1      0    0000ffe4    00000002     
-                  0000ffe4    00000002     main.obj (.int02)
+                  0000ffe4    00000002     button.obj (.int02)
 
 PORT2      0    0000ffe6    00000002     
                   0000ffe6    00000002     rts430_eabi.lib : int03.asm.obj (.int03)
@@ -131,7 +138,7 @@ TIMER1_A1
 
 TIMER1_A0 
 *          0    0000fffa    00000002     
-                  0000fffa    00000002     main.obj (.int13)
+                  0000fffa    00000002     speaker.obj (.int13)
 
 NMI        0    0000fffc    00000002     
                   0000fffc    00000002     rts430_eabi.lib : int14.asm.obj (.int14)
@@ -147,12 +154,21 @@ MODULE SUMMARY
        Module                       code   ro data   rw data
        ------                       ----   -------   -------
     ./
-       main.obj                     342    4         7      
        system_pre_init.obj          10     0         0      
     +--+----------------------------+------+---------+---------+
-       Total:                       352    4         7      
+       Total:                       10     0         0      
                                                             
-    /Applications/ti/ccstheia151/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/lib/rts430_eabi.lib
+    ./src/
+       ultrasound.obj               110    0         0      
+       state.obj                    96     0         6      
+       button.obj                   82     2         1      
+       util.obj                     70     0         0      
+       main.obj                     62     0         0      
+       speaker.obj                  58     2         0      
+    +--+----------------------------+------+---------+---------+
+       Total:                       478    4         7      
+                                                            
+    /Applications/ti/ccstheia131/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/lib/rts430_eabi.lib
        fs_mpy.asm.obj               196    0         0      
        fs_div.asm.obj               156    0         0      
        copy_decompress_lzss.c.obj   124    0         0      
@@ -185,18 +201,18 @@ MODULE SUMMARY
        Stack:                       0      0         80     
        Linker Generated:            0      19        0      
     +--+----------------------------+------+---------+---------+
-       Grand Total:                 1220   47        87     
+       Grand Total:                 1356   47        87     
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 0000c4d4 records: 1, size/record: 4, table size: 4
-	.data: load addr=0000c4c4, load size=0000000b bytes, run addr=00000200, run size=00000007 bytes, compression=copy
+__TI_cinit_table @ 0000c55c records: 1, size/record: 4, table size: 4
+	.data: load addr=0000c54c, load size=0000000b bytes, run addr=00000200, run size=00000007 bytes, compression=copy
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 0000c4d0 records: 2, size/record: 2, table size: 4
+__TI_handler_table @ 0000c558 records: 2, size/record: 2, table size: 4
 	index: 0, handler: __TI_decompress_lzss
 	index: 1, handler: __TI_decompress_none
 
@@ -215,7 +231,7 @@ address   name
 00000057  BCSCTL1                       
 00000058  BCSCTL2                       
 00000053  BCSCTL3                       
-0000c4bc  C$$EXIT                       
+0000c544  C$$EXIT                       
 00000059  CACTL1                        
 0000005a  CACTL2                        
 000010fb  CALBC1_12MHZ                  
@@ -259,7 +275,7 @@ address   name
 00000010  P3REN                         
 0000001b  P3SEL                         
 00000043  P3SEL2                        
-0000c398  Port1_ISR                     
+0000c390  Port1_ISR                     
 00000172  TA0CCR0                       
 00000174  TA0CCR1                       
 00000176  TA0CCR2                       
@@ -283,7 +299,7 @@ address   name
 000010c0  TLV_CHECKSUM                  
 000010f7  TLV_DCO_30_LEN                
 000010f6  TLV_DCO_30_TAG                
-0000c4b6  Timer1_A0_ISR                 
+0000c53e  Timer1_A0_ISR                 
 0000005d  UCA0ABCTL                     
 00000062  UCA0BR0                       
 00000063  UCA0BR1                       
@@ -308,15 +324,15 @@ address   name
 00000120  WDTCTL                        
 00000400  __STACK_END                   
 00000050  __STACK_SIZE                  
-0000c4d4  __TI_CINIT_Base               
-0000c4d8  __TI_CINIT_Limit              
-0000c4d8  __TI_CINIT_Warm               
-0000c4d0  __TI_Handler_Table_Base       
-0000c4d4  __TI_Handler_Table_Limit      
-0000c4ae  __TI_ISR_TRAP                 
-0000c2d0  __TI_auto_init_nobinit_nopinit
+0000c55c  __TI_CINIT_Base               
+0000c560  __TI_CINIT_Limit              
+0000c560  __TI_CINIT_Warm               
+0000c558  __TI_Handler_Table_Base       
+0000c55c  __TI_Handler_Table_Limit      
+0000c52e  __TI_ISR_TRAP                 
+0000c310  __TI_auto_init_nobinit_nopinit
 0000c160  __TI_decompress_lzss          
-0000c470  __TI_decompress_none          
+0000c4b8  __TI_decompress_none          
 0000ffe0  __TI_int00                    
 0000ffe4  __TI_int02                    
 0000ffe6  __TI_int03                    
@@ -334,64 +350,71 @@ ffffffff  __TI_pprof_out_hndl
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
 ffffffff  __c_args__                    
-0000c286  __mspabi_cmpf                 
+0000c280  __mspabi_cmpf                 
 0000c0c4  __mspabi_divf                 
-0000c3c0  __mspabi_fltuf                
-0000c4a0  __mspabi_func_epilog_1        
-0000c49e  __mspabi_func_epilog_2        
-0000c49c  __mspabi_func_epilog_3        
-0000c49a  __mspabi_func_epilog_4        
-0000c498  __mspabi_func_epilog_5        
-0000c496  __mspabi_func_epilog_6        
-0000c494  __mspabi_func_epilog_7        
+0000c3e8  __mspabi_fltuf                
+0000c4e8  __mspabi_func_epilog_1        
+0000c4e6  __mspabi_func_epilog_2        
+0000c4e4  __mspabi_func_epilog_3        
+0000c4e2  __mspabi_func_epilog_4        
+0000c4e0  __mspabi_func_epilog_5        
+0000c4de  __mspabi_func_epilog_6        
+0000c4dc  __mspabi_func_epilog_7        
 0000c000  __mspabi_mpyf                 
-0000c36c  __mspabi_slli                 
-0000c394  __mspabi_slli_1               
-0000c382  __mspabi_slli_10              
-0000c380  __mspabi_slli_11              
-0000c37e  __mspabi_slli_12              
-0000c37c  __mspabi_slli_13              
-0000c37a  __mspabi_slli_14              
-0000c378  __mspabi_slli_15              
-0000c392  __mspabi_slli_2               
-0000c390  __mspabi_slli_3               
-0000c38e  __mspabi_slli_4               
-0000c38c  __mspabi_slli_5               
-0000c38a  __mspabi_slli_6               
-0000c388  __mspabi_slli_7               
-0000c386  __mspabi_slli_8               
-0000c384  __mspabi_slli_9               
-0000c23a  __mspabi_srli                 
-0000c280  __mspabi_srli_1               
-0000c25c  __mspabi_srli_10              
-0000c258  __mspabi_srli_11              
-0000c254  __mspabi_srli_12              
-0000c250  __mspabi_srli_13              
-0000c24c  __mspabi_srli_14              
-0000c248  __mspabi_srli_15              
-0000c27c  __mspabi_srli_2               
-0000c278  __mspabi_srli_3               
-0000c274  __mspabi_srli_4               
-0000c270  __mspabi_srli_5               
-0000c26c  __mspabi_srli_6               
-0000c268  __mspabi_srli_7               
-0000c264  __mspabi_srli_8               
-0000c260  __mspabi_srli_9               
-0000c406  _c_int00_noargs               
+0000c3bc  __mspabi_slli                 
+0000c3e4  __mspabi_slli_1               
+0000c3d2  __mspabi_slli_10              
+0000c3d0  __mspabi_slli_11              
+0000c3ce  __mspabi_slli_12              
+0000c3cc  __mspabi_slli_13              
+0000c3ca  __mspabi_slli_14              
+0000c3c8  __mspabi_slli_15              
+0000c3e2  __mspabi_slli_2               
+0000c3e0  __mspabi_slli_3               
+0000c3de  __mspabi_slli_4               
+0000c3dc  __mspabi_slli_5               
+0000c3da  __mspabi_slli_6               
+0000c3d8  __mspabi_slli_7               
+0000c3d6  __mspabi_slli_8               
+0000c3d4  __mspabi_slli_9               
+0000c234  __mspabi_srli                 
+0000c27a  __mspabi_srli_1               
+0000c256  __mspabi_srli_10              
+0000c252  __mspabi_srli_11              
+0000c24e  __mspabi_srli_12              
+0000c24a  __mspabi_srli_13              
+0000c246  __mspabi_srli_14              
+0000c242  __mspabi_srli_15              
+0000c276  __mspabi_srli_2               
+0000c272  __mspabi_srli_3               
+0000c26e  __mspabi_srli_4               
+0000c26a  __mspabi_srli_5               
+0000c266  __mspabi_srli_6               
+0000c262  __mspabi_srli_7               
+0000c25e  __mspabi_srli_8               
+0000c25a  __mspabi_srli_9               
+0000c40c  _c_int00_noargs               
 0000fffe  _reset_vector                 
 000003b0  _stack                        
-0000c4c2  _system_post_cinit            
-0000c4a4  _system_pre_init              
-0000c4bc  abort                         
+0000c54a  _system_post_cinit            
+0000c51a  _system_pre_init              
+0000c544  abort                         
 00000206  buttonPressed                 
+0000c2ca  delay_ms                      
 0000c1dc  getDistance                   
-0000c3e4  init                          
-0000c340  initGPIO                      
-0000c312  main                          
-0000c482  memcpy                        
-0000c458  runAlertState                 
-0000c422  runArmedState                 
-0000c43e  runIdleState                  
+0000c478  initButtonGPIO                
+0000c524  initSpeakerGPIO               
+0000c4a4  initTimerSpeaker              
+0000c536  initTimerUltrasound           
+0000c50c  initUltrasoundGPIO            
+0000c352  main                          
+0000c4ca  memcpy                        
+0000c444  runAlertState                 
+0000c428  runArmedState                 
+0000c45e  runIdleState                  
+0000c4ec  runState                      
+0000c4fc  setButton                     
+0000c48e  setSpeaker                    
 00000200  state_table                   
 
 
@@ -506,69 +529,76 @@ address   name
 0000c0c4  __mspabi_divf                 
 0000c160  __TI_decompress_lzss          
 0000c1dc  getDistance                   
-0000c23a  __mspabi_srli                 
-0000c248  __mspabi_srli_15              
-0000c24c  __mspabi_srli_14              
-0000c250  __mspabi_srli_13              
-0000c254  __mspabi_srli_12              
-0000c258  __mspabi_srli_11              
-0000c25c  __mspabi_srli_10              
-0000c260  __mspabi_srli_9               
-0000c264  __mspabi_srli_8               
-0000c268  __mspabi_srli_7               
-0000c26c  __mspabi_srli_6               
-0000c270  __mspabi_srli_5               
-0000c274  __mspabi_srli_4               
-0000c278  __mspabi_srli_3               
-0000c27c  __mspabi_srli_2               
-0000c280  __mspabi_srli_1               
-0000c286  __mspabi_cmpf                 
-0000c2d0  __TI_auto_init_nobinit_nopinit
-0000c312  main                          
-0000c340  initGPIO                      
-0000c36c  __mspabi_slli                 
-0000c378  __mspabi_slli_15              
-0000c37a  __mspabi_slli_14              
-0000c37c  __mspabi_slli_13              
-0000c37e  __mspabi_slli_12              
-0000c380  __mspabi_slli_11              
-0000c382  __mspabi_slli_10              
-0000c384  __mspabi_slli_9               
-0000c386  __mspabi_slli_8               
-0000c388  __mspabi_slli_7               
-0000c38a  __mspabi_slli_6               
-0000c38c  __mspabi_slli_5               
-0000c38e  __mspabi_slli_4               
-0000c390  __mspabi_slli_3               
-0000c392  __mspabi_slli_2               
-0000c394  __mspabi_slli_1               
-0000c398  Port1_ISR                     
-0000c3c0  __mspabi_fltuf                
-0000c3e4  init                          
-0000c406  _c_int00_noargs               
-0000c422  runArmedState                 
-0000c43e  runIdleState                  
-0000c458  runAlertState                 
-0000c470  __TI_decompress_none          
-0000c482  memcpy                        
-0000c494  __mspabi_func_epilog_7        
-0000c496  __mspabi_func_epilog_6        
-0000c498  __mspabi_func_epilog_5        
-0000c49a  __mspabi_func_epilog_4        
-0000c49c  __mspabi_func_epilog_3        
-0000c49e  __mspabi_func_epilog_2        
-0000c4a0  __mspabi_func_epilog_1        
-0000c4a4  _system_pre_init              
-0000c4ae  __TI_ISR_TRAP                 
-0000c4b6  Timer1_A0_ISR                 
-0000c4bc  C$$EXIT                       
-0000c4bc  abort                         
-0000c4c2  _system_post_cinit            
-0000c4d0  __TI_Handler_Table_Base       
-0000c4d4  __TI_CINIT_Base               
-0000c4d4  __TI_Handler_Table_Limit      
-0000c4d8  __TI_CINIT_Limit              
-0000c4d8  __TI_CINIT_Warm               
+0000c234  __mspabi_srli                 
+0000c242  __mspabi_srli_15              
+0000c246  __mspabi_srli_14              
+0000c24a  __mspabi_srli_13              
+0000c24e  __mspabi_srli_12              
+0000c252  __mspabi_srli_11              
+0000c256  __mspabi_srli_10              
+0000c25a  __mspabi_srli_9               
+0000c25e  __mspabi_srli_8               
+0000c262  __mspabi_srli_7               
+0000c266  __mspabi_srli_6               
+0000c26a  __mspabi_srli_5               
+0000c26e  __mspabi_srli_4               
+0000c272  __mspabi_srli_3               
+0000c276  __mspabi_srli_2               
+0000c27a  __mspabi_srli_1               
+0000c280  __mspabi_cmpf                 
+0000c2ca  delay_ms                      
+0000c310  __TI_auto_init_nobinit_nopinit
+0000c352  main                          
+0000c390  Port1_ISR                     
+0000c3bc  __mspabi_slli                 
+0000c3c8  __mspabi_slli_15              
+0000c3ca  __mspabi_slli_14              
+0000c3cc  __mspabi_slli_13              
+0000c3ce  __mspabi_slli_12              
+0000c3d0  __mspabi_slli_11              
+0000c3d2  __mspabi_slli_10              
+0000c3d4  __mspabi_slli_9               
+0000c3d6  __mspabi_slli_8               
+0000c3d8  __mspabi_slli_7               
+0000c3da  __mspabi_slli_6               
+0000c3dc  __mspabi_slli_5               
+0000c3de  __mspabi_slli_4               
+0000c3e0  __mspabi_slli_3               
+0000c3e2  __mspabi_slli_2               
+0000c3e4  __mspabi_slli_1               
+0000c3e8  __mspabi_fltuf                
+0000c40c  _c_int00_noargs               
+0000c428  runArmedState                 
+0000c444  runAlertState                 
+0000c45e  runIdleState                  
+0000c478  initButtonGPIO                
+0000c48e  setSpeaker                    
+0000c4a4  initTimerSpeaker              
+0000c4b8  __TI_decompress_none          
+0000c4ca  memcpy                        
+0000c4dc  __mspabi_func_epilog_7        
+0000c4de  __mspabi_func_epilog_6        
+0000c4e0  __mspabi_func_epilog_5        
+0000c4e2  __mspabi_func_epilog_4        
+0000c4e4  __mspabi_func_epilog_3        
+0000c4e6  __mspabi_func_epilog_2        
+0000c4e8  __mspabi_func_epilog_1        
+0000c4ec  runState                      
+0000c4fc  setButton                     
+0000c50c  initUltrasoundGPIO            
+0000c51a  _system_pre_init              
+0000c524  initSpeakerGPIO               
+0000c52e  __TI_ISR_TRAP                 
+0000c536  initTimerUltrasound           
+0000c53e  Timer1_A0_ISR                 
+0000c544  C$$EXIT                       
+0000c544  abort                         
+0000c54a  _system_post_cinit            
+0000c558  __TI_Handler_Table_Base       
+0000c55c  __TI_CINIT_Base               
+0000c55c  __TI_Handler_Table_Limit      
+0000c560  __TI_CINIT_Limit              
+0000c560  __TI_CINIT_Warm               
 0000ffe0  __TI_int00                    
 0000ffe4  __TI_int02                    
 0000ffe6  __TI_int03                    
@@ -588,4 +618,4 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start          
 ffffffff  __c_args__                    
 
-[188 symbols]
+[195 symbols]

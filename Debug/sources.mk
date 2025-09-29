@@ -112,7 +112,5 @@ PDE_DEPS__QUOTED :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 . \
-GrLib/fonts \
-GrLib/grlib \
-Lcd_Driver \
+src \
 
